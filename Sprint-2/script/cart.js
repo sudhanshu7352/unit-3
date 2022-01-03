@@ -4,7 +4,7 @@ var tp =0
 
 cartItems(items)
 function cartItems(el){
-  // cart.innerText =""
+   cart.innerText =""
   el.map(function (el,index){
     var div =document.createElement("div")
 
