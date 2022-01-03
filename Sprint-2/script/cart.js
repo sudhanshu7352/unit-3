@@ -4,7 +4,8 @@ var tp =0
 
 cartItems(items)
 function cartItems(el){
-  el.map(function (el){
+  // cart.innerText =""
+  el.map(function (el,index){
     var div =document.createElement("div")
 
     var img =document.createElement("img");
@@ -21,7 +22,9 @@ function cartItems(el){
     // }
     var remove =document.createElement("button")
     remove.textContent ="Remove"
-    remove.addEventListener("click")
+    remove.addEventListener("click",function(){
+      removeitem(index)
+    })
 
     div.append(img,name,price,remove)
     cart.append(div)
@@ -29,4 +32,11 @@ function cartItems(el){
 }
 
 var price =document.getElementById("price")
-price.textContent = "Total Cart Value : Rs." + tp
+price.textContent = "Total Cart Value : Rs." + tp;
+
+
+function removeitem(index){
+  items.splice(index,1)
+  localStorage.setItem("add",JSON.stringify(items));
+  cartItems(items)
+}
