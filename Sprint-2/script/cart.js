@@ -17,9 +17,13 @@ function cartItems(el){
     var price =document.createElement("p");
     price.innerText = ( Math.floor(Math.random()*400)+100);
       tp += +price.innerText
-    // }
 
-    div.append(img,name,price)
+    // }
+    var remove =document.createElement("button")
+    remove.textContent ="Remove"
+    remove.addEventListener("click")
+
+    div.append(img,name,price,remove)
     cart.append(div)
   })
 }
