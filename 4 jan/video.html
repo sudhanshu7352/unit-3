@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            border: 1px transparent black;
+        }
+        /* #navbar{
+            height: 100px;
+        } */
+        #nav{
+            display: flex;
+            border: 0;
+        }
+        input{
+            width: 500px;
+            height: 25px;
+            margin-left: 140px;
+            padding-left: 20px;
+        }
+        button{
+            height: 30px;
+            margin-right: 20%;
+        }
+        i{
+           font-size: 30px;
+           margin-right: 50px;
+          cursor: pointer;
+        }
+        #you{
+            font-weight: 900;
+            font-family: sans-serif;
+            margin-top: 0px;
+            margin-left: 5px;
+            font-size: 20px;
+        }
+        #youtube{
+             color: red;
+             margin-right: 0;
+        }
+        #main{
+            display: flex;
+            height: 550px;
+            gap: 50px;
+        }
+        #video_details{
+            flex: 4;
+        }
+        #recommendation{
+            flex: 2;
+            overflow: scroll;
+        }
+    </style>
+      <script src="https://kit.fontawesome.com/dea4d8f016.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    
+        <div id="nav">
+            <i class="fas fa-bars"></i>
+            <i class="fab fa-youtube" id="youtube" onclick="window.location.href='class.html'"></i>
+            <P id="you">YouTube</P>
+            <input type="text" id="video" placeholder="Search">
+            <button onclick="searchVideo()">Search</button>
+            <i class="far fa-bell"></i>
+        </div>
+    
+    <div id="main">
+        <div id="video_details"></div>
+        <div id="recommendation">
+            <!-- recommendation -->
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    let {videoId,snippet: {title,channelTitle}} = JSON.parse(localStorage.getItem("clicked_video"))
+
+    let video_div = document.getElementById("video_details")
+
+    let iframe =document.createElement('iframe')
+    iframe.src = `https://www.youtube.com/embed/${videoId}`
+    iframe.width = "100%"
+    iframe.height = "80%"
+    iframe.setAttribute('allowfullscreen',"true")
+    let titl =document.createElement("h3")
+    titl.textContent = title
+    let channeltitle =document.createElement("h2")
+    channeltitle.textContent = channelTitle
+    channeltitle.style.marginLeft ="20px"
+    video_div.append(iframe,titl,channeltitle)
+
+    let url = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=${channelTitle}&type=video&key=AIzaSyBAGDUPsGVaTK3J1cTeAOnsb4azDleXEbk&maxResults=20`
+
+    async function recVideos(){
+
+        try{
+          let res = await fetch(url);
+          let data =await res.json();
+          let x =data.items;
+
+         rVideo(x)
+          console.log(data)
+        }
+        catch(err){
+          console.log(err)
+     }
+    }
+    recVideos()
+    let rec =document.getElementById('recommendation')
+     function rVideo(el){
+      
+        el.map( ({snippet: {title,thumbnails}})=>{
+            let div =document.createElement("div")
+            div.style.display ="flex"
+            
+            let img =document.createElement("img");
+            img.src =thumbnails.default.url
+            img.style.height ="80%"
+
+            let title2 =document.createElement("p");
+            title2.textContent =title
+
+            div.append(img,title2)
+           rec.append(div)
+        })
+     }
+</script>

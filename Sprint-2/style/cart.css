@@ -11,3 +11,6 @@ h2{
 #main{
     display: flex;
 }
+#page{
+    margin-left: 80%;
+}

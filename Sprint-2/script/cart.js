@@ -1,10 +1,12 @@
 var cart = document.getElementById("cart");
 var items = JSON.parse(localStorage.getItem("add"))
-var tp =0
+
 
 cartItems(items)
 function cartItems(el){
+  var tp =0
    cart.innerText =""
+
   el.map(function (el,index){
     var div =document.createElement("div")
 
@@ -17,7 +19,9 @@ function cartItems(el){
 
     var price =document.createElement("p");
     price.innerText = ( Math.floor(Math.random()*400)+100);
-      tp += +price.innerText
+      tp += +price.innerText;
+
+
 
     // }
     var remove =document.createElement("button")
@@ -29,14 +33,17 @@ function cartItems(el){
     div.append(img,name,price,remove)
     cart.append(div)
   })
+  var pr =document.getElementById("price")
+ pr.textContent = "Total Cart Value : Rs." + tp;
 }
 
-var price =document.getElementById("price")
-price.textContent = "Total Cart Value : Rs." + tp;
+
 
 
 function removeitem(index){
   items.splice(index,1)
   localStorage.setItem("add",JSON.stringify(items));
+  
   cartItems(items)
+  
 }

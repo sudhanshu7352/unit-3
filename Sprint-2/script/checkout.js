@@ -1,4 +1,5 @@
-function al(){
+function al(event){
+     event.preventDefault()
     setTimeout(function (){
        alert("Your order is accepted")
     },3000)
@@ -15,4 +16,4 @@ function al(){
         alert("Order out for delivery")
      },12000)
 }
-al()
+// al()

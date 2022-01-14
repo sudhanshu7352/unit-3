@@ -1,5 +1,6 @@
 let meal_div = document.getElementById("meal")
 
+
 showMeal()
 async function showMeal(){
 
@@ -17,8 +18,10 @@ async function showMeal(){
   }
 }
 
-function Meal(el){
 
+function Meal(el){
+    var items =document.getElementById("cartlength")
+     items.textContent = "No. of items : " + cart.length 
     el.map(function (el){
         var div =document.createElement("div")
 
@@ -35,6 +38,7 @@ function Meal(el){
         button.innerText = 'Add to cart'
         button.addEventListener('click',function(){
             addcart(el)
+            
         })
         // button.onclick =function g(){
         //     addcart(el)
@@ -42,15 +46,15 @@ function Meal(el){
 
         div.append(img,name,price,button)
         meal_div.append(div)
+        
     })
- 
+
 }
 var cart = JSON.parse(localStorage.getItem("add")) || [];
 function addcart(el){
  cart.push(el);
  localStorage.setItem("add",JSON.stringify(cart))
 
-  
+  Meal(el)
 }
-  var items =document.getElementById("cartlength")
-    items.textContent = "No. of items : " + cart.length 
+   

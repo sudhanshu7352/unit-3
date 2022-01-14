@@ -8,11 +8,11 @@
     <link rel="stylesheet" href="style/checkout.css">
 </head>
 <body>
-    <form onsubmit="al()">
-        <h2>Your name</h2>
-        <input type="text" placeholder="enter your name">
-        <h2>Your address</h2>
-        <input type="text"><br><br>
+    <form onsubmit="al(event)">
+        <label>Your name</label>
+        <input type="text" placeholder="enter your name" required><br>
+        <label>Your address</label>
+        <input type="text" required><br><br>
         <input type="submit">
     </form>
 </body>
